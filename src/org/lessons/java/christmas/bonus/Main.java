@@ -1,9 +1,8 @@
-package org.lessons.java.christmas;
+package org.lessons.java.christmas.bonus;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import org.lessons.java.christmas.ChristmasLetter;
+
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -25,10 +24,12 @@ public class Main {
             System.out.println("Stop Y/N");
             stop = scan.nextLine().toUpperCase().equalsIgnoreCase("Y");
         }
-
+        scan.close();
         Collections.sort(wishList);
 
-        ChristmasLetter letter = new ChristmasLetter(name, address);
+        System.out.println(wishCounter(wishList));
+
+        org.lessons.java.christmas.ChristmasLetter letter = new ChristmasLetter(name, address);
         letter.getWishList().addAll(wishList);
         System.out.println(letter.toString());
 
@@ -38,6 +39,22 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
-
     }
+
+    public static Map<String,Integer> wishCounter(List<String> desideri){
+        Map<String,Integer> counterMap = new HashMap<>();
+//            metodo che itera la lista passata come parametro
+        for (String desiderio : desideri) {
+
+            Integer count = counterMap.get(desiderio);
+            if (count == null) {
+                count = 0;
+            }
+            counterMap.put(desiderio, count + 1);
+        }
+
+        return counterMap;
+    }
+
+
 }
