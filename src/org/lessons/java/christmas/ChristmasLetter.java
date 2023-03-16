@@ -8,17 +8,15 @@ public class ChristmasLetter {
 //    ATTRIBUTES
     private String name;
     private String address;
-    private List<String> wishList;
+    private List<String> wishList = new ArrayList<>();
 
-    boolean[] goodOrEvil = new boolean[]{false,true};
+//    boolean[] goodOrEvil = new boolean[]{false,true};
     boolean behavior;
     Random randomizer = new Random();
-    public ChristmasLetter(String name, String address, List<String> wishList) {
+    public ChristmasLetter(String name, String address) {
         this.name = name;
         this.address = address;
-        this.wishList = wishList;
-        int randomNumber = randomizer.nextInt();
-        behavior = goodOrEvil[randomNumber];
+        behavior = randomizer.nextBoolean();
     }
 //    GETTER E SETTER
 
@@ -47,13 +45,12 @@ public class ChristmasLetter {
     }
 
 //    METHODS
-    public String send(){
-        if (wishList.size() >= 5){
-            throw new RuntimeException("La lista deve contenere menodi 5 desideri");
+    public String send() throws RuntimeException{
+        if (wishList.size() > 5){
+            throw new RuntimeException("The wish list must contain more at least 5 wishes");
         }
-
-        if (behavior){
-            throw new RuntimeException("Ti sei comportato troppo male quest'anno");
+        if (!behavior){
+            throw new RuntimeException("You behaved bad this year");
         }
 
         return toString();

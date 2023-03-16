@@ -10,6 +10,13 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         List<String> wishList = new ArrayList<>();
 
+        System.out.print("My name is  ");
+        String name = scan.nextLine();
+
+        System.out.print("I live in ");
+        String address = scan.nextLine();
+
+
         boolean stop = false;
         while(!stop){
             System.out.print("What's your wish? ");
@@ -21,6 +28,16 @@ public class Main {
 
         Collections.sort(wishList);
         System.out.println(wishList);
+
+        ChristmasLetter letter = new ChristmasLetter(name, address);
+        letter.getWishList().addAll(wishList);
+        System.out.println(letter.toString());
+
+        try {
+            letter.send();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
 
     }
